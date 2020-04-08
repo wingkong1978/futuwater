@@ -12,6 +12,12 @@ const puppeteer = require('puppeteer');
     let accname = args[2]
     let pwd = args[3]
 
+    if(!accname || !pwd || 0 >= accname.length || 0>=pwd.length){
+        console.log('please run the script by "node autojob.js <accname> <pwd>"')
+        await browser.close()
+       return
+    }
+
     const page = await browser.newPage();
     await page.goto('https://seed.futunn.com/');
     // 其他操作...
