@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 (()=>puppeteer.launch(
     {
-        headless: false
+        // headless: false
     }
 ).then(async browser => {
     let args = process.argv
