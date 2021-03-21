@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 (()=>puppeteer.launch(
     {
-        // headless: false
+        headless: false
     }
 ).then(async browser => {
     let args = process.argv
@@ -19,7 +19,8 @@ const puppeteer = require('puppeteer');
     }
 
     const page = await browser.newPage();
-    await page.goto('https://seed.futunn.com/');
+    // await page.goto('https://seed.futunn.com/');
+    await page.goto('https://passport.futunn.com/?target=https%3A%2F%2Fseed.futunn.com%2F#login');
     // 其他操作...
 
     const ACCSELECTOR = '#loginFormWrapper > form > ul > li.ui-input-wrapper.ui-content-email > input'
@@ -41,9 +42,13 @@ const puppeteer = require('puppeteer');
 
     const WATER_SELECTOR = 'body > div.seedWrap01 > div > div.animationQh01 > div.mainContent > div.opBtnBox > div'
 
-    await page.waitFor(1000)
+    await page.waitFor(2000)
     // const response = await page.waitForNavigation()
-    const response = await page.waitForSelector(WATER_SELECTOR)
+    try{
+        const response = await page.waitForSelector(WATER_SELECTOR)
+    }catch (e) {
+       throw (e)
+    }
 
     // const [response2] = await Promise.all([
     //     page.waitForNavigation(),
@@ -151,5 +156,18 @@ const puppeteer = require('puppeteer');
     // await waterElement.click()
 
     await browser.close();
+}).catch((ee)=>{
+    try {
+        browser.close()
+    } catch (e) {
+
+    }
+}
+).finally(()=>{
+    try {
+        browser.close()
+    } catch (eee) {
+
+    }
 }))()
 
